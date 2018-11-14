@@ -22,6 +22,8 @@ export class ProductsComponent {
   gumasta = true;
   gstr = true;
 
+  paramlist = ['cint', 'foodLicense', 'trademark', 'msme', 'gumasta', 'gstr'];
+
   closeAll: any;
 
   cart: any[] = [];
@@ -55,6 +57,13 @@ export class ProductsComponent {
 
   activate(param: string) {
     this[param] = !this[param];
+    let i = 0;
+    while (this.paramlist[i]) {
+      if (this.paramlist[i] !== param) {
+        this[this.paramlist[i]] = true;
+      }
+      i++;
+    }
   }
 
   get totalGov(): number {
