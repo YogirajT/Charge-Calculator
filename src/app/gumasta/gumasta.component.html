@@ -1,0 +1,34 @@
+<form #gumastaForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="power">Select Number of Employees</label>
+        <select class="form-control"  id="employees"
+                required
+                [(ngModel)]="model.establishment.totalEmployees" name="totalEmployees">
+        <option *ngFor="let opt of options" [value]="opt">{{opt}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="power">Select State</label>
+        <select (ngModelChange)="onChange($event)" class="form-control"  id="state"
+                required
+                [(ngModel)]="model.establishment.state" name="state">
+        <option *ngFor="let opt of stateOpt" [value]="opt.val">{{opt.text}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="power">Select District</label>
+        <select class="form-control"  id="district"
+                required
+                [(ngModel)]="model.establishment.district" name="district">
+                <option value="" disabled selected hidden>Placeholder</option>
+        <option *ngFor="let opt of districtOpt" [value]="opt">{{opt}}</option>
+        </select>
+    </div>
+    <div class="text-danger" *ngIf="model.establishment.totalEmployees === '10'">
+      Charges may vary for more than 9 Employees. Please contact our customer support for details.
+      <br>
+    </div>
+    <button type="button" class="btn btn-default" (click)="newGumasta(); gumastaForm.reset()">Add to Cart</button>
+    <button type="submit" class="btn btn-success" [disabled]="!gumastaForm.form.valid || model.establishment.totalEmployees === '10'">Calculate</button>
+    <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>

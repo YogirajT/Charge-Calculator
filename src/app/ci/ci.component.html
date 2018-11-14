@@ -1,0 +1,19 @@
+
+<form #ciForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="power">Select a Type</label>
+    <select class="form-control"  id="type"
+            required
+            [(ngModel)]="model.type" name="type" (ngModelChange)="quote=null;">
+    <option *ngFor="let opt of options" [value]="opt.val">{{opt.text}}</option>
+    </select>
+  </div>
+  <h6>Please select at least one of the following.</h6>
+  <div class="form-group" *ngIf="model.type === 'llp' || model.type==='pvt'" >
+    <label for="partners">Enter Number of Directors</label>
+    <input class="form-control" type="number" id="partners" min="1" [required]="model.type === 'llp' || model.type==='pvt'" name="partners" [(ngModel)]="model.partners">
+  </div>
+  <button type="button" class="btn btn-default" (click)="newCi(); ciForm.reset()">Add to Cart</button>
+  <button type="submit" class="btn btn-success" [disabled]="!ciForm.form.valid">Calculate</button>
+  <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>

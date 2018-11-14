@@ -1,0 +1,91 @@
+<h5 [ngStyle]="{'color': brown}">Food License State</h5>
+<form #flStateForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="power">Select a Duration</label>
+        <select class="form-control"  id="type"
+                required
+                [(ngModel)]="model.payment.validity" name="validity">
+        <option *ngFor="let opt of options" [value]="opt">{{opt}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="power">Select State</label>
+        <select class="form-control"  id="type"
+                required
+                [(ngModel)]="model.company.state" name="state">
+        <option *ngFor="let opt of stateOpt" [value]="opt.val">{{opt.text}}</option>
+        </select>
+    </div>
+    <div  *ngIf="model.company.state === 'KA'" class="custom-control custom-checkbox mb-3">
+        <input id="express" type="checkbox" class="custom-control-input" value="1" name="express" [ngModel]="model.payment.expressPayment == 1 ? true : model.payment.expressPayment == 0 ? false : null" (ngModelChange)="model.payment.expressPayment = $event ? 1 : 0">
+        <label class="custom-control-label" for="express">Express Delivery for Karnataka</label>
+    </div>
+    <h6>Please select at least one of the following.</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-1" class="custom-control-input" name="kind1" [(ngModel)]="model.business.businessKind.kind1" />
+                    <label class="custom-control-label" for="cb-bk-1">Restaurants</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-3" class="custom-control-input" name="kind3" [(ngModel)]="model.business.businessKind.kind3" />
+                    <label class="custom-control-label" for="cb-bk-3">Wholeseller</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-5" class="custom-control-input" name="kind5" [(ngModel)]="model.business.businessKind.kind5"/>
+                    <label class="custom-control-label" for="cb-bk-5">Supplier</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-7" class="custom-control-input" name="kind7" [(ngModel)]="model.business.businessKind.kind7"/>
+                    <label  class="custom-control-label" for="cb-bk-7">Caterer</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-9" class="custom-control-input" name="kind9" [(ngModel)]="model.business.businessKind.kind9"/>
+                    <label  class="custom-control-label" for="cb-bk-9">Canteens</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-11" class="custom-control-input" name="kind11" [(ngModel)]="model.business.businessKind.kind11"/>
+                    <label  class="custom-control-label" for="cb-bk-11">Storage Units/Godown</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-13" class="custom-control-input" name="kind13" [(ngModel)]="model.business.businessKind.kind13"/>
+                    <label class="custom-control-label" for="cb-bk-13">Manufacturer / Processor / Repacker / Relabeler</label>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group">
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-2" class="custom-control-input" name="kind2" [(ngModel)]="model.business.businessKind.kind2"/>
+                    <label class="custom-control-label" for="cb-bk-2">Retail</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-4" class="custom-control-input" name="kind4" [(ngModel)]="model.business.businessKind.kind4"/>
+                    <label class="custom-control-label" for="cb-bk-4">Distributor</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-6" class="custom-control-input" name="kind6" [(ngModel)]="model.business.businessKind.kind6"/>
+                    <label class="custom-control-label" for="cb-bk-6">Marketer</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-8" class="custom-control-input" name="kind8" [(ngModel)]="model.business.businessKind.kind8"/>
+                    <label class="custom-control-label" for="cb-bk-8">Dhaba / Food Stall / Home Based / Banquet Halls</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-10" class="custom-control-input" name="kind10" [(ngModel)]="model.business.businessKind.kind10"/>
+                    <label class="custom-control-label" for="cb-bk-10">Club</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-12" class="custom-control-input" name="kind12" [(ngModel)]="model.business.businessKind.kind12"/>
+                    <label class="custom-control-label" for="cb-bk-12">Dairy Business</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" id="cb-bk-14" class="custom-control-input" name="kind14" [(ngModel)]="model.business.businessKind.kind14"/>
+                    <label class="custom-control-label" for="cb-bk-14">Import Export</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-default" (click)="newFlState(); flStateForm.reset()">Add to Cart</button>
+    <button type="submit" class="btn btn-success" [disabled]="!flStateForm.form.valid">Calculate</button>
+    <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>

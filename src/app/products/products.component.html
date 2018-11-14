@@ -1,0 +1,137 @@
+<h2 class="text-center">LD Calculator</h2>
+<div class="container">
+  <!-- s:Products Section -->
+  <div class="row">
+    <div class="col-md-6">
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne" (click)="activate('gstr')" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h3 class="mb-0">
+                <small class="text-muted"><b>GSTR</b></small>
+                <i class="fa text-muted pull-right" [class.fa-plus]="gstr" [class.fa-minus]="!gstr" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseOne" class="collapse" [class.show]="closeAll" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <app-gstr (item)="addItem($event)"></app-gstr>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo" (click)="activate('foodLicense')" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <h3 class="mb-0">
+              <small class="text-muted"><b>Food License</b></small>
+              <i class="fa text-muted pull-right" [class.fa-plus]="foodLicense" [class.fa-minus]="!foodLicense" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseTwo" class="collapse" [class.show]="closeAll" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="col-md-12">
+                  <div class="fl-type">
+                    <label for="power">Select a Company Type</label>
+                    <select class="form-control"  id="fl-type"
+                            required name="option" [(ngModel)]="option">
+                      <option *ngFor="let opt of flOptions" [value]="opt">{{opt}}</option>
+                    </select>
+                  </div>
+              </div>
+              <br>
+              <app-food-license *ngIf="option === flOptions[1]" (item)="addItem($event)"></app-food-license>
+              <app-food-license-state *ngIf="option === flOptions[2]" (item)="addItem($event)"></app-food-license-state>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree" (click)="activate('gumasta')" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <h3 class="mb-0">
+              <small class="text-muted"><b>GUMASTA</b></small>
+              <i class="fa text-muted pull-right" [class.fa-plus]="gumasta" [class.fa-minus]="!gumasta" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseThree" class="collapse" [class.show]="closeAll" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <app-gumasta (item)="addItem($event)"></app-gumasta>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFour" (click)="activate('msme')" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <h3 class="mb-0">
+              <small class="text-muted"><b>MSME</b></small>
+              <i class="fa text-muted pull-right" [class.fa-plus]="msme" [class.fa-minus]="!msme" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseFour" class="collapse" [class.show]="closeAll" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+              <app-msme (item)="addItem($event)"></app-msme>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingFive" (click)="activate('trademark')" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+            <h3 class="mb-0">
+              <small class="text-muted"><b>Trademark</b></small>
+              <i class="fa text-muted pull-right" [class.fa-plus]="trademark" [class.fa-minus]="!trademark" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseFive" class="collapse" [class.show]="closeAll" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body">
+              <app-trademark (item)="addItem($event)"></app-trademark>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingSix" (click)="activate('cint')" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+            <h3 class="mb-0">
+              <small class="text-muted"><b>Company Integration</b></small>
+              <i class="fa text-muted pull-right" [class.fa-plus]="cint" [class.fa-minus]="!cint" aria-hidden="true"></i>
+            </h3>
+          </div>
+          <div id="collapseSix" class="collapse" [class.show]="closeAll" aria-labelledby="headingSix" data-parent="#accordion">
+            <div class="card-body">
+              <app-ci (item)="addItem($event)"></app-ci>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- e:Products Section -->
+
+    <div class="col-md-6">
+      <table class="table table-hover table-condensed table-light table-success table-hover">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Government Charge</th>
+            <th>Service Charge</th>
+            <th>GST</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of cart, let i = index;">
+            <td>{{service.name}}</td>
+            <td>{{service.governmentCharge}}</td>
+            <td>{{service.serviceCharge}}</td>
+            <td>{{service.gst}}</td>
+            <td>{{service.total}}</td>
+            <td><button class="btn btn-danger remove-cart" (click)="cart.splice(i,1)"><span class="glyphicon glyphicon-shopping-cart"></span> Remove from Cart</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Grand Total</th>
+            <th>{{ totalGov }}</th>
+            <th>{{ totalService }}</th>
+            <th>{{ totalGst }}</th>
+            <th>{{ totalTotal }}</th>
+            <th><button class="btn btn-danger remove-all" (click)="removeall()">Remove All</button></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+</div>
+

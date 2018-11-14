@@ -1,0 +1,31 @@
+<div class="form-group">
+    <label for="power">Select a Type</label>
+    <select class="form-control"  id="type"
+            required
+            [(ngModel)]="type" name="type" (ngModelChange)="trademarkForm.reset()">
+    <option *ngFor="let opt of options" [value]="opt.val">{{opt.text}}</option>
+    </select>
+</div>
+<form #trademarkForm="ngForm" (ngSubmit)="onSubmit()">
+    <h6>Please select at least one of the following.</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 form-group" *ngIf="type==='Manufacturing' || type==='Both'" >
+                <div class="custom-control custom-checkbox mb-3" *ngFor="let man of manArr; let i=index;">
+                    <input type="checkbox" id="cb-m-{{i}}" class="custom-control-input" #tempRef="ngModel" name="man" [(ngModel)]="model.trademark.manufacturingBusiness[man]" />
+                    <label class="custom-control-label" for="cb-m-{{i}}">{{man}}</label>
+                </div>
+            </div>
+            <div class="col-sm-6 form-group" *ngIf="type==='Services' || type==='Both'">
+                <div class="custom-control custom-checkbox mb-3" *ngFor="let serve of serviceArr; let i=index;">
+                    <input type="checkbox" id="cb-s-{{i}}" class="custom-control-input" name="serve" [(ngModel)]="model.trademark.servicesBusiness[serve]" />
+                    <label class="custom-control-label" for="cb-s-{{i}}">{{serve}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-default" (click)="newTrademark(); trademarkForm.reset()">Add to Cart</button>
+    <button type="submit" class="btn btn-success" [disabled]="!status">Calculate</button>
+    <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>
+

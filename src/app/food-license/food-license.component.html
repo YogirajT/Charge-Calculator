@@ -1,0 +1,14 @@
+<h5 [ngStyle]="{'color': brown}">Food License Basic</h5>
+<form #flBasicForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="power">Select a Duration</label>
+        <select class="form-control"  id="type"
+                required
+                [(ngModel)]="model.business.duration" name="duration">
+        <option *ngFor="let opt of options" [value]="opt">{{opt}}</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-default" (click)="newFlBasic(); flBasicForm.reset()">Add to Cart</button>
+    <button type="submit" class="btn btn-success" [disabled]="!flBasicForm.form.valid">Calculate</button>
+    <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>

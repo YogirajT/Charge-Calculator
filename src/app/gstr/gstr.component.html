@@ -1,0 +1,11 @@
+<form #gstrForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" id="cb-bk-1" class="custom-control-input" value="1" name="model.payment.qGstFiling" [ngModel]="model.payment.qGstFiling == 1 ? true : model.payment.qGstFiling == 0 ? false : null" (ngModelChange)="model.payment.qGstFiling = $event ? 1 : 0" />
+      <label class="custom-control-label" for="cb-bk-1">Include quarterly GSTR Filing</label>
+    </div>
+  </div>
+  <button type="button" class="btn btn-default" (click)="newGstr(); gstrForm.reset()">Add to Cart</button>
+  <button type="submit" class="btn btn-success" [disabled]="!gstrForm.form.valid">Calculate</button>
+  <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>

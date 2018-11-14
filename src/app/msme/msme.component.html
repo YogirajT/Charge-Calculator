@@ -1,0 +1,5 @@
+<form #msmeForm="ngForm" (ngSubmit)="onSubmit()">
+  <button type="button" class="btn btn-default" (click)="newMsme(); msmeForm.reset()">Add to Cart</button>
+  <button type="submit" class="btn btn-success" [disabled]="!msmeForm.form.valid">Calculate</button>
+  <span class="float-right text-success">{{ quote | currency:'INR':true }}</span>
+</form>
