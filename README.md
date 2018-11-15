@@ -1,6 +1,11 @@
-# ChequeBounce
+# LD Calculator
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+
+## Allow CORS by adding these lines
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
 
 ## Development server
 
